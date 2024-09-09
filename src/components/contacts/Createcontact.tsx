@@ -20,6 +20,9 @@ const CreateContactPage: React.FC = () => {
   const [status, setStatus] = useState<'Active' | 'Inactive'>(existingContact?.status || 'Active');
 
   const handleSubmit = () => {
+    if(!firstName || !lastName || !status) {
+      return toast.error('input feilds cannot be empty!!')
+    }
     if (id) {
       dispatch(updateContact({ id, firstName, lastName, status }));
       toast.warn('Contact updated');

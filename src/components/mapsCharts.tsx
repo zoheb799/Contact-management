@@ -110,7 +110,7 @@ const ChartsAndMaps: React.FC = () => {
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' // Correctly typed attribution
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' 
           />        {countriesData && countriesData.map((country: any) => (
                   <Marker
                     key={country.countryInfo._id}
