@@ -31,10 +31,10 @@ const Loader: React.FC = () => {
 };
 
 const ChartsAndMaps: React.FC = () => {
-  const { data: globalData, isLoading: isGlobalDataLoading } = useQuery({
-    queryKey: ['globalData'],
-    queryFn: fetchGlobalData,
-  });
+    const { isLoading: isGlobalDataLoading } = useQuery({
+        queryKey: ['globalData'],
+        queryFn: fetchGlobalData,
+      });
   
   const { data: countriesData, isLoading: isCountriesDataLoading } = useQuery({
     queryKey: ['countriesData'],
@@ -63,7 +63,10 @@ const ChartsAndMaps: React.FC = () => {
         }],
       };
     }
-    return {};
+    return {
+      labels: [],
+      datasets: [],
+    };
   }, [historicalData]);
 
   return (
@@ -99,17 +102,16 @@ const ChartsAndMaps: React.FC = () => {
           <div>
             <h2 className="text-xl font-semibold mb-4 text-center md:text-left">World Map</h2>
             <div className="bg-white p-4 rounded shadow-lg">
-              <MapContainer
-                center={[20, 0]}
-                zoom={2}
-                style={{ height: '400px', width: '100%' }} 
-                className="rounded-md"
-              >
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                {countriesData && countriesData.map((country: any) => (
+           <MapContainer
+          center={[20, 0] as [number, number]} // Explicitly type the center prop
+          zoom={2}
+          style={{ height: '400px', width: '100%' }}
+          className="rounded-md"
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' // Correctly typed attribution
+          />        {countriesData && countriesData.map((country: any) => (
                   <Marker
                     key={country.countryInfo._id}
                     position={[country.countryInfo.lat, country.countryInfo.long]}
